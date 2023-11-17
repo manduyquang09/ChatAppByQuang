@@ -1,0 +1,1 @@
+export const DeveloperImage = require("./Developer.jpg")
