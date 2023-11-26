@@ -93,7 +93,7 @@ const SingleChat = ({ route }) => {
             .catch(error => { });
     };
     const UpdateChatList = () => { };
-    const UploadImage = async () => {
+    const UploadImage = () => {
         try {
             ImagePicker.openPicker({
                 width: 300,
@@ -107,37 +107,21 @@ const SingleChat = ({ route }) => {
                 const localFile = image.path;
                 const storageImageRef = refStorage(storage, 'chatMedia/' + newName);
                 const snapshot = await uploadBytes(storageImageRef, localFile);
-                // const imagedownloadURL = await getDownloadURL(snapshot.ref);
-                // const buffer = Buffer.from(imageData, 'base64');
-                // console.log("buffer :  " + buffer);
-                // const base64String = buffer.toString('base64');
-                // console.log("base:   " + base64String)
-                // let messageData = {
-                //     message: imagedownloadURL,
-                //     from: currentUser.userId,
-                //     to: selectedUser.userId,
-                //     timestamp: new Date().getTime(),
-                //     type: 'image',
-                // };
+                const imagedownloadURL = await getDownloadURL(snapshot.ref);
+                const buffer = Buffer.from(imageData, 'base64');
+                console.log("buffer :  " + buffer);
+                const base64String = buffer.toString('base64');
+                console.log("base:   " + base64String)
+                let messageData = {
+                    message: imagedownloadURL,
+                    from: currentUser.userId,
+                    to: selectedUser.userId,
+                    timestamp: new Date().getTime(),
+                    type: 'image',
+                };
 
-                //  updateMess(messageData);
-                getDownloadURL(ref(snapshot.ref))
-                    .then((url) => {
-                        const xhr = new XMLHttpRequest();
-                        xhr.responseType = 'blob';
-                        xhr.onload = (event) => {
-                            const blob = xhr.response;
-                        };
-                        xhr.open('GET', url);
-                        xhr.send();
+                updateMess(messageData);
 
-                        // Or inserted into an <img> element
-                        const img = document.getElementById('myimg');
-                        img.setAttribute('src', url);
-                    })
-                    .catch((error) => {
-                        // Handle any errors
-                    });
             });
         } catch (error) {
             console.error('Error uploading file:', error);
