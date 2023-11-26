@@ -1,11 +1,12 @@
 // CustomMessage.js
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import { COLORS } from '../Constant/Color';
 import TimeDeliver from './TimeDeliver';
 import moment from 'moment';
 
 const CustomMessage = ({ sender, item, key }) => {
+    console.log("message" + JSON.stringify(item.message))
     return (
 
         <View style={[styles.messContainer, sender ? styles.sender : styles.receiver]}>
@@ -17,7 +18,20 @@ const CustomMessage = ({ sender, item, key }) => {
 
                 ]}
             >
-                <Text style={{ color: sender ? COLORS.white : COLORS.black }}>{item.message}</Text>
+                {item.type === "text" ? (
+                    <Text style={{ color: sender ? COLORS.white : COLORS.black }}>{item.message}</Text>
+
+                ) : (
+                    <Image
+                        source={{ uri: encodeURIComponent(item.message) }}
+                        style={{
+                            height: 150,
+                            width: 150,
+                            resizeMode: 'cover',
+                            borderRadius: 5,
+                        }}
+                    />
+                )}
                 {/* {!sender ? <TimeDeliver /> : null} */}
             </View>
 

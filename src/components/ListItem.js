@@ -1,7 +1,10 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const ListItem = ({ item, onPress }) => {
+    useEffect(() => {
+        console.log("tiem : " + JSON.stringify(item))
+    }, [])
     return (
         <TouchableOpacity
             onPress={onPress}
@@ -39,7 +42,7 @@ const ListItem = ({ item, onPress }) => {
                     }}
                     numberOfLines={1}
                 >
-                    Hentai
+                    {item.lastestMessage}
                 </Text>
             </View>
         </TouchableOpacity>

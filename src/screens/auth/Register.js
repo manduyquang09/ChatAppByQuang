@@ -54,8 +54,8 @@ const Register = ({ navigation }) => {
                 style={styles.Header}
             >
                 <Image
-                    style={{ width: 75, height: 75, borderRadius: 35 }}
-                    source={require("../../Assets/Developer.jpg")}
+                    style={{ width: 85, height: 85, borderRadius: 35 }}
+                    source={require("../../Assets/Icon.jpg")}
                 />
                 <Text
                     style={{
